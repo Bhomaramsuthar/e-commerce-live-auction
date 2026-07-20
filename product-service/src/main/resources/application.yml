@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: product-service
+  mongodb:
+    uri: mongodb+srv://e-com-bidding-springboot:Cde5x1ry081WEcD6@cluster0.4zo0oph.mongodb.net/bidcraft_products?appName=Cluster0
