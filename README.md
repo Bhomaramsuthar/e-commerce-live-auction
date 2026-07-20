@@ -35,3 +35,28 @@ Currently, the system is divided into bounded contexts:
    ```bash
    git clone https://github.com/Bhomaramsuthar/e-commerce-live-auction.git
    cd e-commerce-live-auction
+
+2. **Configure Databases:**
+* Create a PostgreSQL database named `bidcraft_orders`.
+* Update the `application.yml` files in both services with your specific database credentials.
+
+3. **Run the Services:**
+Navigate to each service directory and start the Spring Boot applications:
+* Product Service:
+```bash
+   cd product-service
+   mvn spring-boot:run
+```
+* Order Service
+```bash
+cd ../order-service
+mvn spring-boot:run
+```
+## 🔭 Future Project Scopes
+* Transitioning the live bidding engine to a fully reactive architecture using Spring WebFlux and WebSockets.
+* Implementing a centralized API Gateway and Service Discovery registry.
+* Containerizing the entire infrastructure using Docker and Docker Compose.
+
+## 📬 Contact
+Bhomaram Suthar
+* Email: bhomaramsuthar1027@gmail.com
