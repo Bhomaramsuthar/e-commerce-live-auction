@@ -6,3 +6,8 @@ spring:
     name: product-service
   mongodb:
     uri: mongodb+srv://e-com-bidding-springboot:Cde5x1ry081WEcD6@cluster0.4zo0oph.mongodb.net/bidcraft_products?appName=Cluster0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
