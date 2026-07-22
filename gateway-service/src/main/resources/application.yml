@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true # Tells the Gateway to use Eureka to find routes
+      routes:
+        - id: product-service
+          uri: lb://PRODUCT-SERVICE # The 'lb' stands for Load Balancer. It fetches the IP from Eureka based on this name.
+          predicates:
+            - Path=/api/product/** # If a request starts with this path, send it to the Product Service
+
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/api/order/** # If a request starts with this path, send it to the Order Service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
