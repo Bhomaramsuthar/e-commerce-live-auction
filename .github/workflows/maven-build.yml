@@ -1,0 +1,33 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 25
+      uses: actions/setup-java@v4
+      with:
+        java-version: '25'
+        distribution: 'oracle'
+        cache: maven
+        
+    - name: Build Product Service
+      run: mvn -B clean package -DskipTests --file product-service/pom.xml
+
+    - name: Build Order Service
+      run: mvn -B clean package -DskipTests --file order-service/pom.xml
+      
+    - name: Build Discovery Server
+      run: mvn -B clean package -DskipTests --file discovery-server/pom.xml
+      
+    - name: Build Gateway Service
+      run: mvn -B clean package -DskipTests --file gateway-service/pom.xml
