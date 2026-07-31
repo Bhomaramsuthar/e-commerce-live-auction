@@ -3,6 +3,7 @@ package com.bidcraft.product_service.service;
 import com.bidcraft.product_service.model.Product;
 import com.bidcraft.product_service.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    @Cacheable(value = "product", key = "#id")
     public Product getProductById(String id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));

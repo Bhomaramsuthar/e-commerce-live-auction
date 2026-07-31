@@ -32,4 +32,7 @@ public class ProductController {
     public Product getProductById(@PathVariable String id) {
         return productService.getProductById(id);
     }
+
+    
+
 }

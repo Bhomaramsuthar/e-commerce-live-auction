@@ -2,12 +2,21 @@ server:
   port: 8081
 
 spring:
+  cloud:
+    discovery:
+      enabled: false       #make true for eureka
+
   application:
     name: product-service
   mongodb:
-    uri: mongodb+srv://e-com-bidding-springboot:Cde5x1ry081WEcD6@cluster0.4zo0oph.mongodb.net/bidcraft_products?appName=Cluster0
+    uri: mongodb+srv://e-com-bidding-springboot:Cde5x1ry081WEcD6@cluster0.4zo0oph.mongodb.net/bidcraft_products # Your existing config
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 eureka:
   client:
+    enabled: false       #make true for eureka
     service-url:
       defaultZone: http://localhost:8761/eureka/
