@@ -7,7 +7,7 @@ import com.bidcraft.order_service.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -32,5 +32,14 @@ public class OrderService {
         // Save the order (and because of CascadeType.ALL in our model, it saves the
         // line items automatically too)
         orderRepository.save(order);
+    }
+
+    public Order getOrderById(Long id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+    }
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
     }
 }

@@ -18,6 +18,8 @@ spring:
         format_sql: true
 
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaul tZone: http://localhost:8761/eureka/

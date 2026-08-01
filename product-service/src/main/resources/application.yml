@@ -4,7 +4,7 @@ server:
 spring:
   cloud:
     discovery:
-      enabled: false       #make true for eureka
+      enabled: true       #make true for eureka
 
   application:
     name: product-service
@@ -16,7 +16,9 @@ spring:
       port: 6379
 
 eureka:
+  instance:
+    preferIpAddress: true
   client:
-    enabled: false       #make true for eureka
+    enabled: true       #make true for eureka
     service-url:
       defaultZone: http://localhost:8761/eureka/
