@@ -29,7 +29,7 @@ We are following a phased architecture blueprint to evolve this platform into a 
 
 - [x] **Phase 1: Domain & Polyglot Persistence** (Product Service with MongoDB, Order Service with PostgreSQL)
 - [x] **Phase 2: Microservices & API Gateway** (Eureka Discovery, Spring Cloud Gateway, OpenFeign Integration)
-- [ ] **Phase 3: Caching & High Availability** (Redis, Read-Through Cache)
+- [x] **Phase 3: Caching & High Availability** (Redis, Read-Through Cache)
 - [ ] **Phase 4: Real-Time Communication** (Spring WebFlux, WebSockets/SSE for Live Bidding)
 - [ ] **Phase 5: Event-Driven Architecture** (Kafka/RabbitMQ, Transactional Outbox)
 - [ ] **Phase 6: CQRS & Event Sourcing** (Command/Query Separation, Event Store)
@@ -42,6 +42,7 @@ We are following a phased architecture blueprint to evolve this platform into a 
 * Maven installed
 * PostgreSQL running locally on port `5432`
 * MongoDB local instance or Atlas Cloud URI
+* Redis running locally on port `6379`
 
 ### Setup Steps
 1. **Clone the repository:**
@@ -76,7 +77,6 @@ We are following a phased architecture blueprint to evolve this platform into a 
    ```
 
 ## 🔭 Future Project Scopes
-* Implementing distributed caching (Redis) to optimize product catalog database queries.
 * Transitioning the live bidding engine to a fully reactive architecture using Spring WebFlux and WebSockets.
 * Containerizing the entire infrastructure using Docker and Docker Compose.
 
