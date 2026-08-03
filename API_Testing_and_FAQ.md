@@ -119,3 +119,22 @@ Currently, the system is a great proof-of-concept, but to go to production, you 
 
 7. **Proper Database Migrations:**
    - In `order-service`, you are using `ddl-auto: update`. In production, this should be `validate`, and you should use a migration tool like **Flyway** or **Liquibase** to handle database schema changes securely.
+
+---
+
+## 5. Endpoints Reference Table
+
+| Service | Method | Endpoint | Description |
+|---------|--------|----------|-------------|
+| **Product** | `POST` | `/api/product` | Create a new product |
+| **Product** | `GET` | `/api/product` | Get all products |
+| **Product** | `GET` | `/api/product/{id}` | Get product by ID |
+| **Product** | `PUT` | `/api/product/{id}` | Fully replace a product (all fields required) |
+| **Product** | `PATCH` | `/api/product/{id}` | Partially update a product (only updated fields required) |
+| **Product** | `DELETE` | `/api/product/{id}` | Delete a product |
+| **Order** | `POST` | `/api/order` | Place a new order |
+| **Order** | `GET` | `/api/order` | Get all orders |
+| **Order** | `GET` | `/api/order/{id}` | Get order by ID |
+| **Order** | `PUT` | `/api/order/{id}` | Fully replace an order |
+| **Order** | `PATCH` | `/api/order/{id}` | Partially update an order |
+| **Order** | `DELETE` | `/api/order/{id}` | Delete an order |

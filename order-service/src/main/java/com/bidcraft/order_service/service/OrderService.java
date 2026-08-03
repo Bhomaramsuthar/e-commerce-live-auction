@@ -42,4 +42,28 @@ public class OrderService {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
+
+    public Order updateOrder(Long id, Order order) {
+        Order existingOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+        existingOrder.setOrderLineItemsList(order.getOrderLineItemsList());
+        existingOrder.setOrderNumber(order.getOrderNumber());
+        return orderRepository.save(existingOrder);
+    }
+
+    public Order patchOrder(Long id, Order order) {
+        Order existingOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+        if (order.getOrderLineItemsList() != null) {
+            existingOrder.setOrderLineItemsList(order.getOrderLineItemsList());
+        }
+        if (order.getOrderNumber() != null) {
+            existingOrder.setOrderNumber(order.getOrderNumber());
+        }
+        return orderRepository.save(existingOrder);
+    }
+
+    public void deleteOrder(Long id) {
+        orderRepository.deleteById(id);
+    }
 }
