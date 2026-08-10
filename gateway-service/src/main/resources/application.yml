@@ -19,6 +19,12 @@ spring:
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/api/order/** # If a request starts with this path, send it to the Order Service
+  session:
+    store-type: redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 eureka:
   client:

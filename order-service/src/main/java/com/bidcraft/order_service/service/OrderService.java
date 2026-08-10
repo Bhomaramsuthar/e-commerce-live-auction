@@ -1,10 +1,12 @@
 package com.bidcraft.order_service.service;
 
 import com.bidcraft.order_service.client.ProductClient;
+import com.bidcraft.order_service.event.OrderPlacedEvent;
 import com.bidcraft.order_service.model.Order;
 import com.bidcraft.order_service.model.OrderLineItems;
 import com.bidcraft.order_service.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -17,6 +19,8 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ProductClient productClient;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+
 
     public void placeOrder(Order order) {
         // Verify that each product exists by calling the Product Service
@@ -32,6 +36,9 @@ public class OrderService {
         // Save the order (and because of CascadeType.ALL in our model, it saves the
         // line items automatically too)
         orderRepository.save(order);
+
+        //NEW : Boradcast the event to KAfka!
+        kafkaTemplate.send("notificationTopic",new OrderPlacedEvent(order.getOrderNumber()));
     }
 
     public Order getOrderById(Long id) {
