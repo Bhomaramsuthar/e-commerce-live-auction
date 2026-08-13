@@ -19,6 +19,11 @@ spring:
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/api/order/** # If a request starts with this path, send it to the Order Service
+        - id: bidding-service
+          uri: lb://BIDDING-SERVICE
+          predicates:
+              - Path=/api/bidding/**
+
   session:
     store-type: redis
   data:
