@@ -23,6 +23,7 @@ Currently, the system is divided into bounded contexts and infrastructure nodes:
 * `/gateway-service` - Spring Cloud Gateway handling centralized routing and security.
 * `/product-service` - Manages the highly dynamic product catalog (MongoDB).
 * `/order-service` - Handles strict checkout and transactional financial records (PostgreSQL), utilizing OpenFeign for inter-service communication.
+* `/bidding-service` - Real-time live bidding engine built with Spring WebFlux.
 
 ## 🚀 Roadmap & Progress Tracker
 We are following a phased architecture blueprint to evolve this platform into a fully reactive, event-driven microservices ecosystem.
@@ -30,8 +31,8 @@ We are following a phased architecture blueprint to evolve this platform into a 
 - [x] **Phase 1: Domain & Polyglot Persistence** (Product Service with MongoDB, Order Service with PostgreSQL)
 - [x] **Phase 2: Microservices & API Gateway** (Eureka Discovery, Spring Cloud Gateway, OpenFeign Integration)
 - [x] **Phase 3: Caching & High Availability** (Redis, Read-Through Cache)
-- [ ] **Phase 4: Real-Time Communication** (Spring WebFlux, WebSockets/SSE for Live Bidding)
-- [ ] **Phase 5: Event-Driven Architecture** (Kafka/RabbitMQ, Transactional Outbox)
+- [x] **Phase 4: Real-Time Communication** (Spring WebFlux, WebSockets/SSE for Live Bidding)
+- [x] **Phase 5: Event-Driven Architecture** (Kafka/RabbitMQ, Transactional Outbox)
 - [ ] **Phase 6: CQRS & Event Sourcing** (Command/Query Separation, Event Store)
 - [ ] **Phase 7: Resiliency & Observability** (Resilience4j, Micrometer, Prometheus, Grafana, OpenTelemetry)
 
@@ -40,9 +41,10 @@ We are following a phased architecture blueprint to evolve this platform into a 
 ### Prerequisites
 * Java 25 installed
 * Maven installed
-* PostgreSQL running locally on port `5432`
+* Docker and Docker Compose (recommended for infrastructure)
+* PostgreSQL running locally on port `5432` (if not using Docker)
+* Redis running locally on port `6379` (if not using Docker)
 * MongoDB local instance or Atlas Cloud URI
-* Redis running locally on port `6379`
 
 ### Setup Steps
 1. **Clone the repository:**
@@ -51,11 +53,17 @@ We are following a phased architecture blueprint to evolve this platform into a 
    cd e-commerce-live-auction
    ```
 
-2. **Configure Databases:**
-   * Create a PostgreSQL database named `bidcraft_orders`.
-   * Update the `application.yml` files in both services with your specific database credentials.
+2. **Start Infrastructure with Docker Compose:**
+   ```bash
+   docker-compose up -d
+   ```
+   This will spin up PostgreSQL, Redis, Zookeeper, and Kafka.
 
-3. **Run the Services (Strict Boot Order):**
+3. **Configure Databases:**
+   * If not using Docker, create a PostgreSQL database named `bidcraft_orders` locally.
+   * Update the `application.yml` files in the services with your specific database credentials or MongoDB URI.
+
+4. **Run the Services (Strict Boot Order):**
    Navigate to each service directory and start the Spring Boot applications. The registry must be active before the clients boot.
 
    ```bash
@@ -74,11 +82,16 @@ We are following a phased architecture blueprint to evolve this platform into a 
    # 4. Start Order Service
    cd ../order-service
    mvn spring-boot:run
+   
+   # 5. Start Bidding Service
+   cd ../bidding-service
+   mvn spring-boot:run
    ```
 
 ## 🔭 Future Project Scopes
-* Transitioning the live bidding engine to a fully reactive architecture using Spring WebFlux and WebSockets.
-* Containerizing the entire infrastructure using Docker and Docker Compose.
+* Implementing full CQRS and Event Sourcing patterns for bidding history.
+* Implementing Resiliency patterns (Circuit breakers, bulkheads) with Resilience4j.
+* Adding distributed tracing and metrics with Micrometer, Prometheus, and Grafana.
 
 ## 📬 Contact
 **Bhomaram Suthar**

@@ -1,0 +1,20 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: notification-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notificationId
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*" # Allows deserializing the generic Object
+        spring.json.use.type.headers: false # new fix
+        spring.json.value.default.type: java.util.HashMap # THE FINAL FIX
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

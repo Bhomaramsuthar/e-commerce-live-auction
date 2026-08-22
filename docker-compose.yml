@@ -23,7 +23,7 @@ services:
 
   # ─── Zookeeper (for Kafka) ──────────────────────────
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.3.2
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -32,7 +32,7 @@ services:
 
   # ─── Kafka ──────────────────────────────────────────
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:7.3.2
     depends_on:
       - zookeeper
     ports:
