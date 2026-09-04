@@ -27,6 +27,8 @@ graph TD
         OrderService -->|ACID Tx| PostgreSQL[(PostgreSQL)]
         Gateway -->|Session/Cache| Redis[(Redis)]
         
+        BiddingService -->|Commands/Event Store| AxonServer[(Axon Server)]
+        BiddingService -->|Query Model| Redis
         BiddingService -->|Publishes Events| Kafka{{Apache Kafka}}
         Kafka -->|Consumes Events| OrderService
         Kafka -->|Consumes Events| NotificationService[Notification Service :8084]
