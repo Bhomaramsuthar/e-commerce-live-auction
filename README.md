@@ -37,6 +37,7 @@ graph TD
 * **Language & Framework:** Java 25, Spring Boot 4.1.x, Spring Cloud 2025.1.2
 * **Databases:** PostgreSQL (Relational/ACID), MongoDB (NoSQL/Document)
 * **Message Broker:** Apache Kafka (Event-Driven Architecture)
+* **CQRS & Event Sourcing:** Axon Framework & Axon Server
 * **Caching & Sessions:** Redis
 * **Microservices Tools:** Spring Cloud Gateway, Netflix Eureka (Service Discovery), OpenFeign
 * **Build Tool:** Maven
@@ -48,6 +49,7 @@ graph TD
 * **Service Discovery:** Dynamic service registration using Netflix Eureka.
 * **Real-Time Bidding:** Live broadcasts and reactive endpoints powered by Spring WebFlux and Server-Sent Events (SSE).
 * **Event-Driven Processing:** Asynchronous decoupling using Apache Kafka for order generation and notifications after an auction ends.
+* **CQRS & Event Sourcing:** Immutable audit trail of bidding history using Axon Server, with separate Command and Query models backed by Redis for fast reads.
 
 ## The process
 The project was systematically developed across several architectural phases:
@@ -56,15 +58,16 @@ The project was systematically developed across several architectural phases:
 3. **Caching & High Availability:** Integrating Redis for fast, read-through caching.
 4. **Real-Time Communication:** Implementing Spring WebFlux for low-latency live bidding.
 5. **Event-Driven Architecture:** Introducing Kafka to decouple services, allowing the Bidding Service to asynchronously notify the Order Service upon auction completion.
+6. **CQRS & Event Sourcing Engine:** Implemented full Command/Query Responsibility Segregation using Axon Framework to create an immutable audit trail of bids and optimize read models.
 
 ## What I Learned
 * Designing and orchestrating a multi-module microservices architecture from scratch.
 * Handling distributed system challenges like service discovery, gateway routing, and inter-service communication (OpenFeign).
 * Configuring and managing polyglot persistence, ensuring data is stored optimally based on access patterns.
 * Implementing asynchronous, event-driven communication using Apache Kafka and resolving serialization/deserialization challenges between producer and consumer services.
+* Applying CQRS and Event Sourcing patterns with the Axon Framework to manage complex state changes and maintain a robust audit log.
 
 ## How it can be improved
-* **CQRS & Event Sourcing:** Implement full Command/Query Responsibility Segregation for a perfect audit trail of bidding history.
 * **Resiliency & Observability:** Add Resilience4j for circuit breakers and bulkheads, and integrate Micrometer/Prometheus/Grafana for distributed tracing and metrics.
 * **Frontend Dashboard:** Develop a modern, minimalist Web GUI visualizing live bids (via WebSockets/SSE) alongside sleek product grids.
 
@@ -85,7 +88,7 @@ The project was systematically developed across several architectural phases:
    ```bash
    docker-compose up -d
    ```
-   *This spins up PostgreSQL, Redis, Zookeeper, and Kafka.*
+   *This spins up PostgreSQL, Redis, Axon Server, Zookeeper, and Kafka.*
 
 3. **Run the Services (Strict Boot Order):**
    Navigate to each service directory and start them in the following order (ensure the registry is active before clients boot).
