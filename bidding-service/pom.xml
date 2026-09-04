@@ -51,6 +51,19 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+		<!-- Axon Framework for CQRS & Event Sourcing -->
+		<dependency>
+			<groupId>org.axonframework</groupId>
+			<artifactId>axon-spring-boot-starter</artifactId>
+			<version>4.10.0</version> <!-- Standard stable version for Spring Boot 3 -->
+		</dependency>
+
+		<!-- Spring Data Redis for the Query Read Model -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

@@ -4,6 +4,15 @@ server:
 spring:
   application:
     name: bidding-service
+    data:
+      redis:
+        host: localhost
+        port: 6379
+
+axon:
+  axonserver:
+    servers: localhost:8124
+    context: default
 
 eureka:
   instance:
