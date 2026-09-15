@@ -52,3 +52,17 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+# Search Engine (Fuzzy Text Matching)
+  elasticsearch:
+    # Spring Boot 4.1 uses the Elasticsearch 9.4 Java client; major versions must match.
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.4.2
+    container_name: e-commerce-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # Prevents ES from eating all your RAM
+    ports:
+      - "9200:9200" # REST API port
+      - "9300:9300" # Node communication port
+    restart: always

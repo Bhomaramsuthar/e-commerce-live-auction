@@ -1,0 +1,13 @@
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\client\ProductCatalogClient.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\client\ProductSnapshot.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\config\ElasticsearchIndexConfig.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\controller\SearchController.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\controller\SearchExceptionHandler.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\dto\ProductSearchResponse.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\event\ProductEvent.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\model\ProductDocument.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\repository\ProductSearchRepository.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\SearchServiceApplication.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\service\ProductIndexRebuildService.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\service\ProductSearchService.java
+S:\IntelliJ\E-Commerce-&-Live-Auction-Platform\search-service\src\main\java\com\bidcraft\search_service\service\ProductSyncService.java

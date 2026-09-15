@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -19,6 +20,10 @@ import java.util.Map;
 public class Product implements Serializable {
     @Id
     private String id;
+
+    /** Stable catalogue identifier used to make product creation idempotent. */
+    @Indexed(unique = true, sparse = true)
+    private String sku;
     private String name;
     private String description;
     private BigDecimal price;
