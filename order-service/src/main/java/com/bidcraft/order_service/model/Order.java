@@ -22,6 +22,8 @@ public class Order {
 
     private String orderNumber;
 
+    private String userId;
+
     // This creates the actual relational link between the two tables
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")

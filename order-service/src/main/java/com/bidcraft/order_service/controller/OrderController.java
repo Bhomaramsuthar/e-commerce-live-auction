@@ -27,6 +27,12 @@ public class OrderController {
         return orderService.getOrderById(id);
     }
 
+    @GetMapping("/user/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Order> getOrdersByUserId(@PathVariable String userId) {
+        return orderService.getOrdersByUserId(userId);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Order> getAllOrders() {

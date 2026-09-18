@@ -7,10 +7,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+import com.bidcraft.order_service.service.OrderService;
+
 @Service
 public class AuctionListeners {
 
     private static final Logger log = LoggerFactory.getLogger(AuctionListeners.class);
+    private final OrderService orderService;
+
+    public AuctionListeners(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @KafkaListener(topics = "auctionTopic", groupId = "orderGroupId")
     public void handleAuctionEnded(Map<String, Object> eventPayload) {
@@ -26,6 +33,8 @@ public class AuctionListeners {
 
             log.info("🧾 KAFKA EVENT RECEIVED: Generating Auto-Invoice for Product [{}] | Winner: [{}] | Amount: ${}",
                     productId, winnerId, finalPrice);
+
+            orderService.createAuctionInvoice(winnerId, productId, finalPrice);
 
         } catch (Exception e) {
             log.error("❌ Failed to process auction event: {}", e.getMessage());

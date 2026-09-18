@@ -1,0 +1,15 @@
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\AuthServiceApplication.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\controller\AuthController.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\dto\AuthResponse.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\dto\LoginRequest.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\dto\RegisterRequest.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\dto\UserProfileResponse.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\exception\GlobalExceptionHandler.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\model\Role.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\model\User.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\repository\UserRepository.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\security\CustomUserDetails.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\security\CustomUserDetailsService.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\security\JwtAuthenticationFilter.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\security\JwtUtil.java
+S:\IntelliJ\E-Commerce-and-Live-Auction-Platform\auth-service\src\main\java\com\bidcraft\auth_service\security\SecurityConfig.java

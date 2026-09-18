@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import { ArrowUpRight } from "lucide-react"
 
 const columns = [
   {
@@ -44,18 +43,9 @@ export function Footer() {
               Curated luxury and exclusive live auctions.
             </p>
 
-            {/* Newsletter inline */}
-            <div className="mt-6 flex max-w-[300px]">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="flex-1 border border-border bg-transparent px-3 py-2 text-[12px] text-foreground placeholder:text-muted-foreground focus:border-foreground focus:outline-none transition-colors"
-              />
-              <button className="border border-l-0 border-border bg-foreground px-3 py-2 text-[12px] text-background transition-colors hover:bg-foreground/90 flex items-center gap-1">
-                Subscribe
-                <ArrowUpRight className="h-3 w-3" />
-              </button>
-            </div>
+            <p className="mt-6 text-[12px] text-muted-foreground/60">
+              Authenticated items · Buyer protection · Worldwide shipping
+            </p>
           </div>
 
           {/* Link columns */}

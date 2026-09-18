@@ -133,6 +133,30 @@
     scroll-behavior: smooth;
   }
 
+  /* Focus-visible ring for keyboard navigation (A7) */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  /* Skip to content link (A6) */
+  .skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 999;
+    padding: 0.5rem 1rem;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .skip-to-content:focus {
+    left: 0;
+  }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;

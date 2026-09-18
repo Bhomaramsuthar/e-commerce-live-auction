@@ -1,4 +1,5 @@
 import axios from "axios"
+import { parseApiError } from "@/types/api"
 
 /**
  * Axios client pre-configured for the Spring Cloud Gateway.
@@ -12,6 +13,14 @@ export const apiClient = axios.create({
   },
 })
 
+/**
+ * Custom event dispatched when the API returns 401.
+ * AuthContext listens for this to clear user state and redirect,
+ * avoiding a direct import of `logout()` (which would create a
+ * circular dependency between client.ts ↔ auth.ts).
+ */
+export const AUTH_ERROR_EVENT = "bidcraft:auth-error"
+
 // ── Request interceptor: attach JWT token if present ──
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem("bidcraft_token")
@@ -21,16 +30,17 @@ apiClient.interceptors.request.use((config) => {
   return config
 })
 
-// ── Response interceptor: normalise error shape ──
+// ── Response interceptor: transform errors into typed ApiError ──
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    const message =
-      error.response?.data?.message ||
-      error.message ||
-      "An unexpected error occurred"
+    const apiError = parseApiError(error)
 
-    console.error(`[API Error] ${error.config?.url}: ${message}`)
-    return Promise.reject(error)
+    // Global 401 handler: notify the app that auth has failed
+    if (apiError.code === "UNAUTHORIZED") {
+      window.dispatchEvent(new CustomEvent(AUTH_ERROR_EVENT))
+    }
+
+    return Promise.reject(apiError)
   },
 )

@@ -1,17 +1,17 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { ArrowRight, Shield, Truck, BadgeCheck, Headphones } from "lucide-react"
+import { ArrowRight, Shield, Truck, BadgeCheck, Headphones, Gavel } from "lucide-react"
 
+import { useProducts } from "@/hooks/queries/useProducts"
 import { ProductCard } from "@/components/cards/ProductCard"
-import { AuctionCard } from "@/components/cards/AuctionCard"
+import { ProductGridSkeleton } from "@/components/ui/LoadingSkeleton"
+import { ErrorState, getErrorCode } from "@/components/ui/ErrorState"
+import { EmptyState } from "@/components/ui/EmptyState"
 
 import heroImage from "@/assets/hero.jpg"
 import watchImg from "@/assets/products/watch.jpg"
-import bagImg from "@/assets/products/bag.jpg"
 import ringImg from "@/assets/products/ring.jpg"
 import shoesImg from "@/assets/products/shoes.jpg"
-import necklaceImg from "@/assets/products/necklace.jpg"
-import sunglassesImg from "@/assets/products/sunglasses.jpg"
 
 /* ── Animation variants ── */
 const reveal = {
@@ -28,82 +28,9 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.08 } },
 }
 
-/* ── Mock data ── */
-const liveAuctions = [
-  {
-    id: "a1",
-    name: "Automatic Rose Gold 40mm",
-    designer: "Maison Vachette",
-    currentBid: "$4,200",
-    image: watchImg,
-    endsAt: new Date(Date.now() + 3_600_000 * 5 + 1_200_000),
-    totalBids: 23,
-  },
-  {
-    id: "a2",
-    name: "Sellier 28 Noir",
-    designer: "Atelier Marchand",
-    currentBid: "$8,750",
-    image: bagImg,
-    endsAt: new Date(Date.now() + 3_600_000 * 12 + 2_400_000),
-    totalBids: 41,
-  },
-  {
-    id: "a3",
-    name: "Solitaire 0.5ct VVS1",
-    designer: "Carat & Co",
-    currentBid: "$3,100",
-    image: ringImg,
-    endsAt: new Date(Date.now() + 3_600_000 * 2 + 900_000),
-    totalBids: 17,
-  },
-  {
-    id: "a4",
-    name: "Oxford Cap-Toe Cognac",
-    designer: "Berluti Reserve",
-    currentBid: "$1,850",
-    image: shoesImg,
-    endsAt: new Date(Date.now() + 3_600_000 * 8),
-    totalBids: 9,
-  },
-]
+/* Removed mock liveAuctions — will connect to a real backend endpoint */
 
-const newArrivals = [
-  {
-    id: "p1",
-    name: "Aviator Classic Gold",
-    designer: "Luxe Eyewear",
-    price: "$620",
-    image: sunglassesImg,
-    category: "Accessories",
-    isNew: true,
-  },
-  {
-    id: "p2",
-    name: "Petite Chain Pendant",
-    designer: "Maison Dorée",
-    price: "$1,280",
-    image: necklaceImg,
-    category: "Jewelry",
-    isNew: true,
-  },
-  {
-    id: "p3",
-    name: "Automatic Rose Gold 40mm",
-    designer: "Maison Vachette",
-    price: "$5,400",
-    image: watchImg,
-    isNew: true,
-  },
-  {
-    id: "p4",
-    name: "Sellier 28 Noir",
-    designer: "Atelier Marchand",
-    price: "$12,500",
-    image: bagImg,
-    isNew: true,
-  },
-]
+/* Removed mock newArrivals */
 
 const collections = [
   {
@@ -150,6 +77,17 @@ const values = [
 ]
 
 export function HomePage() {
+  const { data: products, isLoading, isError, error, refetch } = useProducts()
+
+  // Format price helper
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(price)
+  }
+
   return (
     <>
       {/* ═══════════════════════════════════════════════
@@ -278,19 +216,21 @@ export function HomePage() {
             </motion.div>
           </motion.div>
 
-          {/* Cards grid */}
+          {/* Cards — Coming Soon */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
             variants={stagger}
-            className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-5"
+            className="py-16 flex flex-col items-center justify-center text-center border border-dashed border-border/40"
           >
-            {liveAuctions.map((auction, i) => (
-              <motion.div key={auction.id} custom={i} variants={reveal}>
-                <AuctionCard {...auction} />
-              </motion.div>
-            ))}
+            <motion.div custom={0} variants={reveal}>
+              <Gavel className="h-8 w-8 text-muted-foreground/30 mb-4 mx-auto" />
+              <h3 className="text-lg font-medium">Auctions Coming Soon</h3>
+              <p className="text-muted-foreground mt-2 max-w-sm text-sm">
+                Live auction listings will appear here once available.
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -341,9 +281,40 @@ export function HomePage() {
             variants={stagger}
             className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-5"
           >
-            {newArrivals.map((product, i) => (
+            {isLoading && (
+              <div className="col-span-2 md:col-span-4">
+                <ProductGridSkeleton count={4} columns="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-5" />
+              </div>
+            )}
+
+            {isError && (
+              <div className="col-span-2 md:col-span-4">
+                <ErrorState
+                  title="Failed to load new arrivals"
+                  message="We're having trouble connecting to the product service."
+                  code={getErrorCode(error)}
+                  onRetry={() => refetch()}
+                />
+              </div>
+            )}
+
+            {!isLoading && !isError && products?.length === 0 && (
+              <div className="col-span-2 md:col-span-4">
+                <EmptyState title="No products yet" message="Check back soon for new arrivals." />
+              </div>
+            )}
+
+            {!isLoading && !isError && products?.slice(0, 4).map((product, i) => (
               <motion.div key={product.id} custom={i} variants={reveal}>
-                <ProductCard {...product} />
+                <ProductCard 
+                  id={product.id}
+                  name={product.name}
+                  designer={product.dynamicAttributes?.designer || "Unknown Designer"}
+                  price={formatPrice(product.price)}
+                  image={product.dynamicAttributes?.image || watchImg}
+                  category={product.dynamicAttributes?.category}
+                  isNew={product.dynamicAttributes?.isNew === "true" || true}
+                />
               </motion.div>
             ))}
           </motion.div>

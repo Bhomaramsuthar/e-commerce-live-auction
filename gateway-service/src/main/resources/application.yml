@@ -6,6 +6,19 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+              - PATCH
+            allowedHeaders: "*"
+            allowCredentials: true
       discovery:
         locator:
           enabled: true # Tells the Gateway to use Eureka to find routes
@@ -22,7 +35,15 @@ spring:
         - id: bidding-service
           uri: lb://BIDDING-SERVICE
           predicates:
-              - Path=/api/bidding/**
+              - Path=/api/bidding/**, /api/auctions/**
+        - id: search-service
+          uri: lb://SEARCH-SERVICE
+          predicates:
+              - Path=/api/search/**
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+              - Path=/api/auth/**
 
   session:
     store-type: redis

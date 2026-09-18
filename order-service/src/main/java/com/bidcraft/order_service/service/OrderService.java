@@ -39,14 +39,8 @@ public class OrderService {
         // Automatically generate a unique order tracking number
         order.setOrderNumber(UUID.randomUUID().toString());
 
-        // Save the order (and because of CascadeType.ALL in our model, it saves the
-        // line items automatically too)
-
         //1. Save to PostgreSQL
         orderRepository.save(order);
-
-        //NEW : Boradcast the event to KAfka!
-        //kafkaTemplate.send("notificationTopic",new OrderPlacedEvent(order.getOrderNumber()));
 
         try {
             //2. Create the event
@@ -60,7 +54,26 @@ public class OrderService {
         }catch (Exception e){
             throw new RuntimeException("Failed to save event to outbox",e);
         }
+    }
 
+    public void createAuctionInvoice(String userId, String productId, Double finalPrice) {
+        Order order = new Order();
+        order.setUserId(userId);
+        order.setOrderNumber("INV-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
+
+        OrderLineItems item = new OrderLineItems();
+        item.setProductId(productId);
+        item.setProductName("Auction Won: " + productId);
+        item.setPrice(java.math.BigDecimal.valueOf(finalPrice));
+        item.setQuantity(1);
+
+        order.setOrderLineItemsList(List.of(item));
+
+        orderRepository.save(order);
+    }
+
+    public List<Order> getOrdersByUserId(String userId) {
+        return orderRepository.findByUserId(userId);
     }
 
     public Order getOrderById(Long id) {

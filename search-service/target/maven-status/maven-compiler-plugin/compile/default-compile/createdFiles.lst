@@ -1,7 +1,7 @@
 com\bidcraft\search_service\event\ProductEvent.class
+SearchExceptionHandler$SearchExceptionHandler.class
 com\bidcraft\search_service\service\ProductSearchService.class
 com\bidcraft\search_service\client\ProductCatalogClient$1.class
-com\bidcraft\search_service\controller\SearchExceptionHandler.class
 com\bidcraft\search_service\repository\ProductSearchRepository.class
 com\bidcraft\search_service\service\ProductSyncService.class
 com\bidcraft\search_service\dto\ProductSearchResponse.class
@@ -12,4 +12,5 @@ com\bidcraft\search_service\client\ProductCatalogClient.class
 com\bidcraft\search_service\model\ProductDocument$ProductDocumentBuilder.class
 com\bidcraft\search_service\SearchServiceApplication.class
 com\bidcraft\search_service\service\ProductIndexRebuildService.class
+SearchExceptionHandler.class
 com\bidcraft\search_service\client\ProductSnapshot.class

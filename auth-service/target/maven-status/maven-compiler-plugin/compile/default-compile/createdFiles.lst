@@ -1,0 +1,17 @@
+com\bidcraft\auth_service\dto\UserProfileResponse.class
+com\bidcraft\auth_service\dto\AuthResponse.class
+com\bidcraft\auth_service\security\JwtUtil.class
+com\bidcraft\auth_service\controller\AuthController.class
+com\bidcraft\auth_service\repository\UserRepository.class
+com\bidcraft\auth_service\model\Role.class
+com\bidcraft\auth_service\security\CustomUserDetailsService.class
+com\bidcraft\auth_service\dto\UserProfileResponse$UserProfileResponseBuilder.class
+com\bidcraft\auth_service\security\CustomUserDetails.class
+com\bidcraft\auth_service\dto\RegisterRequest.class
+com\bidcraft\auth_service\dto\AuthResponse$AuthResponseBuilder.class
+com\bidcraft\auth_service\model\User$UserBuilder.class
+com\bidcraft\auth_service\security\JwtAuthenticationFilter.class
+com\bidcraft\auth_service\dto\LoginRequest.class
+com\bidcraft\auth_service\AuthServiceApplication.class
+com\bidcraft\auth_service\model\User.class
+com\bidcraft\auth_service\security\SecurityConfig.class
